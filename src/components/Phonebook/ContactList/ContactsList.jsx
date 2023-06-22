@@ -1,17 +1,15 @@
+// import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { getContactsFilter, getContactsList } from '../../../redux/selector';
+// import { getContactsFilter, getContactsList } from '../../../redux/selector';
+import { getVisibleContacts } from '../../../redux/selector'
 import css from './ContactList.module.css'
 import { Contact } from 'components/Phonebook/Contact/Contact'
 
 export const ContactsList = () => {
-    const contacts = useSelector(getContactsList);
-    const filter = useSelector(getContactsFilter);
-    const visibleContacts = [
-    ...contacts.filter(contact => contact.name.toLowerCase().includes(filter)),
-  ];
+    const contacts = useSelector(getVisibleContacts);
 
     return (
-        <ul className= {css.contactList}>{visibleContacts.map(contact =>
+        <ul className= {css.contactList}>{contacts.map(contact =>
             <li className={css.contactList__item}
                 key={contact.id}>
                 <Contact

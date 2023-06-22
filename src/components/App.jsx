@@ -1,16 +1,22 @@
+
+import { Filter } from './Phonebook/Filter/Filter'
+import { ContactsList } from "./Phonebook/ContactList/ContactsList";
+import { ContactForm } from "./Phonebook/ContactForm/ContactForm";
+
 export const App = () => {
   return (
     <div
       style={{
         height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
+        fontSize: 20,
+        color: '#010101',
+        padding: 30,
+        
       }}
     >
-      React homework template
+        <ContactForm />
+        <Filter />
+        <ContactsList/>
     </div>
   );
 };

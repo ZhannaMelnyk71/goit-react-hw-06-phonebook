@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { getContactsList } from '../../../redux/selector';
 import { addContact } from '../../../redux/contactsSlice';
+import { nanoid } from "@reduxjs/toolkit";
 import css from './ContactForm.module.css'
 
 
@@ -13,17 +14,31 @@ export const ContactForm = () => {
     e.preventDefault();
 
     const form = e.target;
-    const formName = e.target.elements.name.value;
-    const formNumber = e.target.elements.number.value;
+    const newContact = {
+      id: nanoid(),
+      name: form.name.value,
+      number: form.number.value,
+    };
+    // const formName = e.target.elements.name.value;
+    // const formNumber = e.target.elements.number.value;
+      const normalizedName = newContact.name.toLowerCase();
 
-      
-    if (contacts.some(({ name }) => name === formName)) {
-      return alert(`${formName} is already in contacts`);
+      if (checkDobleName(normalizedName)) {
+      return alert(`${form.name.value} is already in contacts`);
     }
 
-    dispatch(addContact(formName, formNumber));
+    dispatch(addContact(newContact));
     form.reset();
+    // if (contacts.some(({ name }) => name === formName)) {
+    //   return alert(`${formName} is already in contacts`);
+    // }
+
+    // dispatch(addContact(formName, formNumber));
+    // form.reset();
   };
+    
+     const checkDobleName = name =>
+    contacts.find(contact => contact.name.toLowerCase() === name);
       
     return (
         <form className={css.form} onSubmit={onSubmit}>
